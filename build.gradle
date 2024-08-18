@@ -27,5 +27,5 @@ shadowJar {
     archiveClassifier.set('shadow')
     archiveVersion.set(version)
 
-    destinationDirectory.set(file("$rootDir/output"))
+    destinationDirectory.set(file("$rootDir/build/libs"))
 }
