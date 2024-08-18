@@ -1,9 +1,6 @@
 package com.refitted.netcheck;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 import java.io.*;
 import java.security.DigestInputStream;
@@ -28,7 +25,8 @@ public class Main {
         file.createNewFile();
 
         FileWriter fileWriter = new FileWriter(file);
-        fileWriter.write(jsonObject.toString());
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        fileWriter.write(gson.toJson(jsonObject));
         fileWriter.close();
 
         File fileSha1 = new File("supportedVersions.json.sha1");
