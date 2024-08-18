@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version '8.3.0'
+}
+
+group = 'com.refitted'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(shadow('com.google.code.gson:gson:2.11.0'))
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'NetCheck',
+                'Implementation-Version': version,
+                'Main-Class': 'com.refitted.netcheck.Main'
+    }
+}
+
+shadowJar {
+    archiveBaseName.set('NetCheck')
+    archiveClassifier.set('shadow')
+    archiveVersion.set(version)
+
+    destinationDirectory.set(file("$rootDir/output"))
+}
