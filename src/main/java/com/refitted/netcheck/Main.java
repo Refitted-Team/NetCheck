@@ -12,11 +12,13 @@ public class Main {
         JsonObject jsonObject = JsonParser.parseReader(new FileReader("supportedVersions.json")).getAsJsonObject();
 
         for (JsonElement jsonElement : jsonObject.asMap().values()) {
-            JsonArray jsonArray = jsonElement.getAsJsonArray();
-            for (JsonElement jsonElement1 : jsonArray) {
-                String path = jsonElement1.getAsJsonObject().get("url").getAsString();
-                String sha1 = sha1Code("." + path);
-                jsonElement1.getAsJsonObject().addProperty("sha1", sha1);
+            if (jsonElement.isJsonArray()) {
+                JsonArray jsonArray = jsonElement.getAsJsonArray();
+                for (JsonElement jsonElement1 : jsonArray) {
+                    String path = jsonElement1.getAsJsonObject().get("url").getAsString();
+                    String sha1 = sha1Code("." + path);
+                    jsonElement1.getAsJsonObject().addProperty("sha1", sha1);
+                }
             }
         }
 
