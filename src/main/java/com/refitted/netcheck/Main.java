@@ -6,6 +6,7 @@ import java.io.*;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 public class Main {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
@@ -17,7 +18,7 @@ public class Main {
                 for (JsonElement jsonElement1 : jsonArray) {
                     String path = jsonElement1.getAsJsonObject().get("url").getAsString();
                     String sha1 = sha1Code("." + path);
-                    jsonElement1.getAsJsonObject().addProperty("sha1", sha1);
+                    jsonElement1.getAsJsonObject().addProperty("sha1", sha1.toLowerCase(Locale.ROOT));
                 }
             }
         }
@@ -36,7 +37,7 @@ public class Main {
         fileSha1.createNewFile();
 
         FileWriter fileWriterSha1 = new FileWriter(fileSha1);
-        fileWriterSha1.write(sha1Code("supportedVersions.json"));
+        fileWriterSha1.write(sha1Code("supportedVersions.json").toLowerCase(Locale.ROOT));
         fileWriterSha1.close();
     }
 
